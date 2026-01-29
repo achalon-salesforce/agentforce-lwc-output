@@ -2,11 +2,15 @@
 
 A Salesforce solution that enables users to track packages using natural language queries through Agentforce. The solution retrieves comprehensive package tracking information including real-time location coordinates, delivery status, carrier details, and estimated delivery dates, then displays the package location on an interactive map.
 
+**Note**: This is a demonstration project with **completely hardcoded data**. The `PackageTrackingAgent` class returns static sample data and does not connect to any real package tracking APIs. See the [Extending the Solution](#extending-the-solution) section for guidance on integrating with real carrier APIs.
+
 ![Architecture Diagram](assets/architecture-diagram.png)
 
 ## Overview
 
 This project demonstrates how to integrate Agentforce with custom Apex agents and Lightning Web Components to create an intelligent package tracking experience. Users can simply ask "Where is my package?" or "Track package 1Z999AA10123456784" in Agentforce, and the system will retrieve and display tracking information with an interactive map visualization.
+
+**Important**: All package tracking data in this solution is **hardcoded** for demonstration purposes. The `PackageTrackingAgent` class returns static sample data regardless of the tracking number provided. This project serves as a template for integrating with real package tracking APIs.
 
 ## How It Works
 
@@ -15,7 +19,7 @@ This project demonstrates how to integrate Agentforce with custom Apex agents an
 1. **User Query**: User asks about package tracking in Agentforce chat interface
 2. **GenAI Function**: Agentforce recognizes the intent and invokes the "Get Package Tracking" GenAI Function
 3. **Apex Agent**: The GenAI Function calls the `PackageTrackingAgent` Apex class
-4. **Data Retrieval**: The Apex agent retrieves package tracking data (currently using sample data, but can be extended to call external APIs)
+4. **Data Retrieval**: The Apex agent returns **hardcoded sample data** (the same data is returned regardless of the tracking number provided). This can be extended to call external APIs for real tracking data.
 5. **Response**: Package tracking information is returned including:
    - Tracking number
    - Carrier information
@@ -43,7 +47,8 @@ This project demonstrates how to integrate Agentforce with custom Apex agents an
 - **Features**:
   - `@InvocableMethod` that accepts a tracking number
   - Returns comprehensive package tracking information
-  - Currently uses sample data (can be extended to integrate with external APIs like UPS, FedEx, DHL, etc.)
+  - **Note**: Currently returns **completely hardcoded data** - the same sample data is returned regardless of the tracking number provided
+  - Can be extended to integrate with external APIs like UPS, FedEx, DHL, etc.
 
 ### 3. Data Model (`PackageTracking`)
 - **Location**: `force-app/main/default/classes/PackageTracking.cls`
@@ -75,7 +80,9 @@ This project demonstrates how to integrate Agentforce with custom Apex agents an
 
 ### 6. Permission Set (`PackageTrackingAccess`)
 - **Location**: `force-app/main/default/permissionsets/PackageTrackingAccess.permissionset-meta.xml`
-- **Purpose**: Grants users access to the package tracking functionality
+- **Purpose**: Grants access to the package tracking functionality
+- **Critical**: Must be assigned to the Agentforce user (typically `EinsteinService` user) to ensure Agentforce can execute the Apex class actions
+- Provides access to the `PackageTrackingAgent` Apex class required for the GenAI Function to work properly
 
 ## Setup Instructions
 
@@ -105,7 +112,10 @@ This project demonstrates how to integrate Agentforce with custom Apex agents an
 4. **Assign the Permission Set**
    - Navigate to Setup → Permission Sets
    - Find "Package Tracking Access"
-   - Assign it to users who need access
+   - **Important**: Assign it to the Agentforce user (typically the `EinsteinService` user, where Einstein and Service are one word)
+   - This ensures Agentforce has the necessary access to run the action in the Apex class
+   - The permission set provides access to the Apex class required for package tracking functionality
+   - You can also assign it to regular users who need access to the component
 
 5. **Enable Agentforce** (if not already enabled)
    - Navigate to Setup → Agentforce
@@ -119,14 +129,15 @@ This project demonstrates how to integrate Agentforce with custom Apex agents an
    - "Track package 1Z999AA10123456784"
    - "Get tracking information for 1Z999AA10123456784"
 3. **View the results** - The component will display:
-   - Package tracking details
+   - Package tracking details (hardcoded sample data)
    - Interactive map with package location marker
+   - **Note**: Any tracking number will return the same hardcoded sample data
 
 ## Extending the Solution
 
 ### Integrating with Real APIs
 
-The `PackageTrackingAgent` class currently uses sample data. To integrate with real carrier APIs:
+**Current State**: The `PackageTrackingAgent` class is **completely hardcoded** and returns the same static sample data for any tracking number. To integrate with real carrier APIs:
 
 1. **Add Named Credentials** for API authentication
 2. **Update `PackageTrackingAgent.getPackageTracking()`** to:

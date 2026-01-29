@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Package Tracking" icon-name="standard:package">
+        <div class="container slds-p-around_small">
+            <!-- Package Information -->
+            <div class="compact-info slds-m-bottom_small">
+                <dl>
+                    <dt class="slds-text-color_weak slds-truncate">Tracking Number:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">
+                        <strong>{displayInfo.trackingNumber}</strong>
+                    </dd>
+                    <dt class="slds-text-color_weak slds-truncate">Carrier:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">{displayInfo.carrier}</dd>
+                    <dt class="slds-text-color_weak slds-truncate">Status:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">
+                        <lightning-badge label={displayInfo.status}></lightning-badge>
+                    </dd>
+                    <dt class="slds-text-color_weak slds-truncate">Last Update:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">{displayInfo.lastUpdate}</dd>
+                    <dt class="slds-text-color_weak slds-truncate">Estimated Delivery:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">{displayInfo.estimatedDeliveryDate}</dd>
+                    <dt class="slds-text-color_weak slds-truncate">Destination:</dt>
+                    <dd class="slds-truncate slds-m-bottom_x-small">{displayInfo.destinationAddress}</dd>
+                </dl>
+            </div>
+
+            <!-- Map Display -->
+            <template if:true={hasLocationData}>
+                <div class="slds-box slds-theme_shade slds-m-top_small">
+                    <h3 class="slds-text-heading_small slds-m-bottom_x-small">Current Package Location</h3>
+                    <div class="map-container">
+                        <lightning-map
+                            map-markers={mapMarkers}
+                            zoom-level={zoomLevel}
+                            center={mapCenter}
+                            markers-title="Package Location">
+                        </lightning-map>
+                    </div>
+                </div>
+            </template>
+            <template if:false={hasLocationData}>
+                <div class="slds-box slds-theme_shade slds-m-top_small">
+                    <div class="slds-text-align_center slds-p-around_medium">
+                        <lightning-icon icon-name="utility:location" size="medium" class="slds-m-bottom_x-small"></lightning-icon>
+                        <p class="slds-text-color_weak slds-text-body_small">Location data not available</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,5 @@
+{
+  "title" : "Package Tracking",
+  "description" : "Custom Lightning type for displaying package tracking information with map coordinates",
+  "lightning:type" : "@apexClassType/c__PackageTracking"
+}

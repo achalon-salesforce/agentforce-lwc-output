@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Retrieves comprehensive package tracking information including real-time location coordinates, delivery status, carrier details, and estimated delivery date. Returns tracking data formatted for display on an interactive map.</description>
+    <invocationTarget>PackageTrackingAgent</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <masterLabel>Get Package Tracking</masterLabel>
+    <progressIndicatorMessage>Retrieving your package data.</progressIndicatorMessage>
+</GenAiFunction>

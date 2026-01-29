@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "packageInfo" : {
+      "title" : "Package Tracking Information",
+      "description" : "Complete package tracking information including current location coordinates, delivery status, carrier details, and estimated delivery date",
+      "lightning:type" : "c__PackageTracking",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

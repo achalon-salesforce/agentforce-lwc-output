@@ -1,0 +1,14 @@
+{
+  "required" : [ "trackingNumber" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "trackingNumber" : {
+      "title" : "Tracking Number",
+      "description" : "The unique tracking number assigned by the shipping carrier (e.g., UPS, FedEx, DHL) to identify and track the package throughout its delivery journey",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
